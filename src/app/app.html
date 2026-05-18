@@ -1,12 +1,13 @@
+@if (currentScreen === 'login') {
 <main class="login-screen">
   <section class="login-panel" aria-labelledby="login-title">
     <h1 id="login-title">Welcome to Green<br />Pass</h1>
 
-    <div class="photo-placeholder" aria-label="Green Pass logo placeholder">
+    <div class="login-logo" aria-label="Green Pass logo placeholder">
       FOTO1
     </div>
 
-    <form class="login-form">
+    <form class="login-form" (submit)="goHome($event)">
       <label class="field">
         <span class="sr-only">Email</span>
         <input type="email" name="email" placeholder="Email" autocomplete="email" />
@@ -31,3 +32,267 @@
     </nav>
   </section>
 </main>
+} @else {
+<main class="app-shell">
+  <section class="app-phone" [class.no-scroll]="currentScreen !== 'home' && currentScreen !== 'promotion-detail'">
+    <header class="app-header">
+      <button class="icon-button back-button" type="button" aria-label="Volver" (click)="goBack()">
+        <span aria-hidden="true"></span>
+      </button>
+
+      <h1>{{ isHomeSectionActive() ? 'Home' : currentScreen }}</h1>
+
+      <button class="profile-button" type="button" aria-label="Perfil" (click)="navigateTo('profile')">
+        <span class="profile-head" aria-hidden="true"></span>
+        <span class="profile-body" aria-hidden="true"></span>
+      </button>
+    </header>
+
+    @if (currentScreen === 'home') {
+    <div class="home-content">
+      <section class="featured-strip" aria-label="Eventos destacados">
+        <button class="featured-card" type="button" (click)="openDetail('sea-lions')">
+          <div class="featured-photo">FOTO2</div>
+          <h2>Exhibición educativa<br />de leones marinos</h2>
+        </button>
+
+        <button class="featured-card" type="button" (click)="openDetail('auditorium')">
+          <div class="featured-photo">FOTO3</div>
+          <h2>Guerra de las<br />nubes</h2>
+        </button>
+
+        <button class="featured-card" type="button">
+          <div class="featured-photo">FOTO4</div>
+          <h2>Experiencia familiar<br />Green Pass</h2>
+        </button>
+      </section>
+
+      <section class="promo-list" aria-label="Promociones">
+        <button class="promo-card" type="button" (click)="openDetail('friday')">
+          <div class="promo-photo">FOTO5</div>
+          <div class="promo-copy">
+            <h2>Entradas por<br />19,90€ los viernes</h2>
+            <p>Planazo de <strong>viernes</strong> al mejor precio con esta promoción.</p>
+            <small>Parque de atracciones Madrid</small>
+          </div>
+          <span class="promo-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <button class="promo-card" type="button" (click)="openDetail('groups')">
+          <div class="promo-photo">FOTO6</div>
+          <div class="promo-copy">
+            <h2>¡Grupos +20 con<br />50% de descuento!</h2>
+            <p>Reúne a tu familia y amigos y aprovecha este <strong>precio especial.</strong></p>
+            <small>Parque Warner Madrid</small>
+          </div>
+          <span class="promo-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <button class="promo-card" type="button">
+          <div class="promo-photo">FOTO7</div>
+          <div class="promo-copy">
+            <h2>El mejor precio para visitantes entre 3 y 7 años, con 65 años o más y los miembros de familias numerosas.</h2>
+            <small>Parque Warner Madrid</small>
+          </div>
+          <span class="promo-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <button class="promo-card" type="button">
+          <div class="promo-photo">FOTO8</div>
+          <div class="promo-copy">
+            <h2>Entrada gratuita menores de 1 m</h2>
+            <p>Un día de diversión acuática en Aquópolis Villanueva y aprovecha esta <strong>ventaja especial.</strong></p>
+            <small>Aquopolis Villanueva de la Cañada</small>
+          </div>
+          <span class="promo-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <button class="promo-card" type="button">
+          <div class="promo-photo">FOTO9</div>
+          <div class="promo-copy">
+            <h2>Grupos desde 16,50€ por persona</h2>
+            <p>Visita en grupo Zoo Aquarium de Madrid y descubre los continentes y <strong>animales</strong> más sorprendentes.</p>
+            <small>Zoo Aquarium de Madrid</small>
+          </div>
+          <span class="promo-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <button class="promo-card" type="button">
+          <div class="promo-photo">FOTO10</div>
+          <div class="promo-copy">
+            <h2>Durmiendo entre tiburones</h2>
+            <p>Pasa una noche inolvidable durmiendo con los tiburones del acuario</p>
+            <small>Atlantis Aquarium Madrid</small>
+          </div>
+          <span class="promo-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+      </section>
+    </div>
+    } @else if (currentScreen === 'promotion-detail') {
+    <div class="detail-content">
+      @if (activeDetail === 'friday') {
+      <article class="detail-card">
+        <div class="detail-photo">FOTO5</div>
+        <h2>Entrada por 19,90€ los viernes</h2>
+        <a class="map-link" href="#">Ver en el mapa <span>&rarr;</span></a>
+
+        <h3>¡Exclusivo para los viernes!</h3>
+        <p>
+          ¿Te apetece un plan diferente para esta semana? <strong>Si has nacido entre 2004 y 2012,
+          PAMazo</strong> es justo lo que estás buscando. Olvídate de lo de siempre y prepárate
+          para disfrutar de un <strong>viernes distinto en Madrid</strong>, con un ambiente único
+          y pensado para pasarlo en grande con tu gente.
+        </p>
+        <ul>
+          <li><strong>19,90€ Entrada al parque.</strong></li>
+          <li>
+            <strong>24,90€</strong>, vive la experiencia completa con <strong>Entrada al parque +
+            Pasaje de terror "The Walking Dead Experience".</strong>
+          </li>
+        </ul>
+      </article>
+      } @else if (activeDetail === 'sea-lions') {
+      <article class="detail-card sea-detail">
+        <div class="detail-photo">FOTO2</div>
+        <h2>Exhibición educativa de leones marinos</h2>
+        <a class="map-link" href="#">Ver en el mapa <span>&rarr;</span></a>
+
+        <div class="info-row">
+          <span class="info-icon money-icon" aria-hidden="true"></span>
+          <p><strong>Precio:</strong> Gratis</p>
+        </div>
+
+        <div class="info-row">
+          <span class="info-icon clock-icon" aria-hidden="true"></span>
+          <p><strong>Duración:</strong> 15 min</p>
+        </div>
+
+        <div class="info-row">
+          <span class="info-icon clock-icon" aria-hidden="true"></span>
+          <p>
+            <strong>De lunes a miercoles a las 12:00, 14:00 y 18:30.</strong><br />
+            <strong>De jueves a sábado a las 12:00,14:00, 16:30 y 18:30.
+            Domingo a las 12:00, 14:00 y 18:30.</strong>
+          </p>
+        </div>
+
+        <div class="info-row">
+          <span class="info-icon paw-icon" aria-hidden="true"></span>
+          <p><strong>Actividad animal:</strong> León Marino de la Patagonia</p>
+        </div>
+
+        <div class="info-row">
+          <span class="info-icon access-icon" aria-hidden="true"></span>
+          <p><strong>Accesible para personas con discapacidad</strong></p>
+        </div>
+      </article>
+      } @else if (activeDetail === 'groups') {
+      <article class="detail-card">
+        <div class="detail-photo">FOTO6</div>
+        <h2>¡Grupos +20 con 50% de descuento!</h2>
+        <a class="map-link" href="#">Ver en el mapa <span>&rarr;</span></a>
+
+        <h3>Entrada para grupos +20</h3>
+        <p>
+          Forma tu <strong>grupo de 20 a 60 personas</strong> y hazte con tu
+          <strong>entrada al 50% de descuento.</strong> Para descubrir nuestros increíbles extras,
+          contacta con nuestro Contact Center.
+        </p>
+      </article>
+      } @else {
+      <article class="detail-card sea-detail">
+        <div class="detail-photo">FOTO3</div>
+        <h2>Exhibición educativa de leones marinos</h2>
+        <a class="map-link" href="#">Ver en el mapa <span>&rarr;</span></a>
+
+        <div class="info-row">
+          <span class="info-icon money-icon" aria-hidden="true"></span>
+          <p><strong>Precio:</strong> Gratis</p>
+        </div>
+
+        <div class="info-row">
+          <span class="info-icon clock-icon" aria-hidden="true"></span>
+          <p><strong>Duración:</strong> 30 min</p>
+        </div>
+
+        <div class="info-row">
+          <span class="info-icon clock-icon" aria-hidden="true"></span>
+          <p>
+            <strong>Lunes a las 16:00 y 17:30.</strong><br />
+            <strong>Sábado a las 15:30 y 17:30.</strong><br />
+            <strong>Domingo a las 16:00.</strong>
+          </p>
+        </div>
+
+        <div class="info-row">
+          <span class="info-icon people-icon" aria-hidden="true"></span>
+          <p>Niños y familias</p>
+        </div>
+
+        <div class="info-row">
+          <span class="info-icon target-icon" aria-hidden="true"></span>
+          <p>Gran teatro Auditorio</p>
+        </div>
+      </article>
+      }
+    </div>
+    } @else {
+    <section class="placeholder-screen">
+      {{ currentScreen }}
+    </section>
+    }
+
+    <footer class="bottom-nav" aria-label="Navegación principal">
+      <button
+        class="nav-item"
+        [class.active]="isHomeSectionActive()"
+        type="button"
+        (click)="navigateTo('home')"
+      >
+        <span class="nav-icon home-icon" aria-hidden="true"></span>
+        <span>Home</span>
+      </button>
+
+      <button
+        class="nav-item"
+        [class.active]="currentScreen === 'map'"
+        type="button"
+        (click)="navigateTo('map')"
+      >
+        <span class="nav-icon pin-icon" aria-hidden="true"></span>
+        <span>Mapa</span>
+      </button>
+
+      <button
+        class="nav-item"
+        [class.active]="currentScreen === 'challenges'"
+        type="button"
+        (click)="navigateTo('challenges')"
+      >
+        <span class="nav-icon medal-icon" aria-hidden="true"></span>
+        <span>Retos</span>
+      </button>
+
+      <button
+        class="nav-item"
+        [class.active]="currentScreen === 'prizes'"
+        type="button"
+        (click)="navigateTo('prizes')"
+      >
+        <span class="nav-icon gift-icon" aria-hidden="true"></span>
+        <span>Premios</span>
+      </button>
+
+      <button
+        class="nav-item"
+        [class.active]="currentScreen === 'ranking'"
+        type="button"
+        (click)="navigateTo('ranking')"
+      >
+        <span class="nav-icon chart-icon" aria-hidden="true"></span>
+        <span>Ranking</span>
+      </button>
+    </footer>
+  </section>
+</main>
+}
