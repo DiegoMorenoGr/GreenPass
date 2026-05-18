@@ -34,13 +34,16 @@
 </main>
 } @else {
 <main class="app-shell">
-  <section class="app-phone" [class.no-scroll]="currentScreen !== 'home' && currentScreen !== 'promotion-detail'">
+  <section
+    class="app-phone"
+    [class.no-scroll]="currentScreen !== 'home' && currentScreen !== 'promotion-detail' && currentScreen !== 'challenges'"
+  >
     <header class="app-header">
       <button class="icon-button back-button" type="button" aria-label="Volver" (click)="goBack()">
         <span aria-hidden="true"></span>
       </button>
 
-      <h1>{{ isHomeSectionActive() ? 'Home' : currentScreen }}</h1>
+      <h1>{{ screenTitle() }}</h1>
 
       <button class="profile-button" type="button" aria-label="Perfil" (click)="navigateTo('profile')">
         <span class="profile-head" aria-hidden="true"></span>
@@ -91,7 +94,8 @@
         <button class="promo-card" type="button">
           <div class="promo-photo">FOTO7</div>
           <div class="promo-copy">
-            <h2>El mejor precio para visitantes entre 3 y 7 años, con 65 años o más y los miembros de familias numerosas.</h2>
+            <h2>Entrada Reducida</h2>
+            <p>El mejor precio para visitantes entre 3 y 7 años, con 65 años o más y los miembros de familias numerosas.</p>
             <small>Parque Warner Madrid</small>
           </div>
           <span class="promo-arrow" aria-hidden="true">&rarr;</span>
@@ -236,6 +240,256 @@
       </article>
       }
     </div>
+    } @else if (currentScreen === 'challenge-detail') {
+    <div class="challenge-detail-content">
+      <article class="challenge-detail-card">
+        <div class="challenge-detail-photo">{{ activeChallenge.image }}</div>
+        <h2>{{ activeChallenge.title }}</h2>
+
+        <button class="map-link challenge-map-link" type="button" (click)="openChallengeMap()">
+          Ver en el mapa <span>&rarr;</span>
+        </button>
+
+        <h3>{{ activeChallenge.question }}</h3>
+        <p>{{ activeChallenge.body }}</p>
+
+        <div class="qr-placeholder">QR</div>
+      </article>
+    </div>
+    } @else if (currentScreen === 'map') {
+    <section class="map-screen" aria-label="Mapa del parque">
+      <label class="park-select">
+        <span class="sr-only">Parque</span>
+        <select
+          name="park"
+          [(ngModel)]="selectedPark"
+          (ngModelChange)="onParkChange()"
+          [style.width.ch]="parkSelectWidth()"
+        >
+          @for (park of parks; track park) {
+          <option [value]="park">{{ park }}</option>
+          }
+        </select>
+      </label>
+
+      <div class="map-viewport">
+        <div
+          class="map-canvas"
+          [class.attractions-map]="isAttractionsPark()"
+          [class.zoo-map]="isZooPark()"
+          [style.width.px]="mapWidth()"
+          [style.height.px]="mapHeight()"
+        >
+          <div class="map-background">
+            <span>MAPA: {{ selectedPark }}</span>
+          </div>
+          @if (!hasRealMapImage()) {
+          <div class="map-route route-one"></div>
+          <div class="map-route route-two"></div>
+          <div class="map-water water-one"></div>
+          <div class="map-water water-two"></div>
+          <div class="map-label castor">Pereira (Castor)</div>
+          <div class="map-label gorillas">Gorilas</div>
+          <div class="map-label charcas">Fuente de<br />las Charcas</div>
+          <div class="map-label delfinario">Delfinario<br />Zoo Aquarium</div>
+          <div class="map-label batan">Casa del Batan</div>
+          <span class="map-pin pin-one" aria-hidden="true"></span>
+          <span class="map-pin pin-two" aria-hidden="true"></span>
+          <span class="map-pin pin-three" aria-hidden="true"></span>
+          <span class="map-pin pin-four" aria-hidden="true"></span>
+          }
+        </div>
+      </div>
+
+      <div class="zoom-control" aria-label="Controles de zoom">
+        <button type="button" aria-label="Acercar mapa" (click)="zoomIn()">+</button>
+        <button type="button" aria-label="Alejar mapa" (click)="zoomOut()">-</button>
+      </div>
+    </section>
+    } @else if (currentScreen === 'challenges') {
+    <div class="challenges-content">
+      <div class="challenges-logo">IMAGEN1</div>
+
+      <section class="challenge-list" aria-label="Lista de retos">
+        <button
+          class="challenge-card"
+          type="button"
+          (click)="openChallenge({
+            image: 'IMAGEN2',
+            title: 'Recoger residuos y llevarlos a un punto de reciclaje',
+            park: 'Parque de atracciones Madrid',
+            body: 'Recoge residuos dentro del parque y llévalos a un punto de reciclaje. Cuando termines, escanea el código para registrar el reto y sumar tus puntos.'
+          })"
+        >
+          <div class="challenge-photo">IMAGEN2</div>
+          <div class="challenge-copy">
+            <h2>Recoger residuos y llevarlos a un punto de reciclaje</h2>
+            <p>Tiempo restante : <span>00:00</span></p>
+            <p>Puntos <strong>150</strong></p>
+            <small>Parque de Atracciones Madrid</small>
+          </div>
+          <span class="challenge-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <button
+          class="challenge-card"
+          type="button"
+          (click)="openChallenge({
+            image: 'IMAGEN3',
+            title: 'Recoger bandejas',
+            park: 'Parque de atracciones Madrid',
+            body: 'Ayuda a mantener limpia la zona de comida recogiendo 5 bandejas y llevándolas al punto indicado. Completa el reto escaneando el código QR.'
+          })"
+        >
+          <div class="challenge-photo">IMAGEN3</div>
+          <div class="challenge-copy">
+            <h2>Recoger bandejas</h2>
+            <p>Recoger 5 bandejas</p>
+            <p>Tiempo restante : <span>00:00</span></p>
+            <p>Puntos <strong>150</strong></p>
+            <small>Parque de Atracciones Madrid</small>
+          </div>
+          <span class="challenge-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <button class="challenge-card" type="button" (click)="openChallenge()">
+          <div class="challenge-photo">IMAGEN4</div>
+          <div class="challenge-copy">
+            <h2>Ayuda a Bob Esponja</h2>
+            <p>Ayuda a recoger desechos para que Fondo de Bikini siga limpia</p>
+            <p>Tiempo restante : <span>00:00</span></p>
+            <p>Puntos <strong>150</strong></p>
+            <small>Parque de Atracciones Madrid</small>
+          </div>
+          <span class="challenge-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <button
+          class="challenge-card"
+          type="button"
+          (click)="openChallenge({
+            image: 'IMAGEN5',
+            title: 'Recoger bandejas',
+            park: 'Parque de atracciones Madrid',
+            body: 'Recoge 5 bandejas y deposítalas en el lugar correcto para mantener el parque ordenado.'
+          })"
+        >
+          <div class="challenge-photo">IMAGEN5</div>
+          <div class="challenge-copy">
+            <h2>Recoger bandejas</h2>
+            <p>Recoger 5 bandejas</p>
+            <p>Tiempo restante : <span>00:00</span></p>
+            <p>Puntos <strong>150</strong></p>
+            <small>Parque de Atracciones Madrid</small>
+          </div>
+          <span class="challenge-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <button
+          class="challenge-card"
+          type="button"
+          (click)="openChallenge({
+            image: 'IMAGEN6',
+            title: 'Recoger bandejas',
+            park: 'Parque de atracciones Madrid',
+            body: 'Recoge 5 bandejas en la zona asignada y registra el reto para conseguir tus puntos.'
+          })"
+        >
+          <div class="challenge-photo">IMAGEN6</div>
+          <div class="challenge-copy">
+            <h2>Recoger bandejas</h2>
+            <p>Recoger 5 bandejas</p>
+            <p>Tiempo restante : <span>00:00</span></p>
+            <p>Puntos <strong>150</strong></p>
+            <small>Parque de Atracciones Madrid</small>
+          </div>
+          <span class="challenge-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <button
+          class="challenge-card"
+          type="button"
+          (click)="openChallenge({
+            image: 'IMAGEN7',
+            title: 'Recoger residuos',
+            park: 'Parque Warner Madrid',
+            body: 'Recoge residuos del parque y llévalos al punto de reciclaje más cercano. Escanea el QR al terminar.'
+          })"
+        >
+          <div class="challenge-photo">IMAGEN7</div>
+          <div class="challenge-copy">
+            <h2>Recoger residuos</h2>
+            <p>Recoger y llevar residuos al punto de reciclaje.</p>
+            <p>Tiempo restante : <span>00:00</span></p>
+            <p>Puntos <strong>150</strong></p>
+            <small>Parque Warner Madrid</small>
+          </div>
+          <span class="challenge-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <button
+          class="challenge-card"
+          type="button"
+          (click)="openChallenge({
+            image: 'IMAGEN8',
+            title: 'Ayuda a Bugs Bunny',
+            park: 'Parque Warner Madrid',
+            body: 'Ayuda a Bugs Bunny a recoger su casa y deja todo preparado para los siguientes visitantes.'
+          })"
+        >
+          <div class="challenge-photo">IMAGEN8</div>
+          <div class="challenge-copy">
+            <h2>Ayuda a Bugs Bunny</h2>
+            <p>Ayuda a Bugs Bunny a recoger su casa</p>
+            <p>Tiempo restante : <span>00:00</span></p>
+            <p>Puntos <strong>150</strong></p>
+            <small>Parque Warner Madrid</small>
+          </div>
+          <span class="challenge-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <button
+          class="challenge-card"
+          type="button"
+          (click)="openChallenge({
+            image: 'IMAGEN9',
+            title: 'Descarga la app y regístrate',
+            park: 'Parque de atracciones Madrid',
+            body: 'Completa tu registro en GreenPass y escanea el QR para recibir los puntos de bienvenida.'
+          })"
+        >
+          <div class="challenge-photo">IMAGEN9</div>
+          <div class="challenge-copy">
+            <h2>Descarga la app y regístrate</h2>
+            <p>Tiempo restante : <span>00:00</span></p>
+            <p>Puntos <strong>150</strong></p>
+            <small>Parques Reunidos</small>
+          </div>
+          <span class="challenge-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+
+        <button
+          class="challenge-card"
+          type="button"
+          (click)="openChallenge({
+            image: 'IMAGEN10',
+            title: 'Manten la basura en su lugar',
+            park: 'Parque de atracciones Madrid',
+            body: 'Tira los desechos en sus puntos de reciclaje y ayuda a mantener el parque limpio durante tu visita.'
+          })"
+        >
+          <div class="challenge-photo">IMAGEN10</div>
+          <div class="challenge-copy">
+            <h2>Manten la basura en su lugar</h2>
+            <p>Tira los desechos en sus puntos de reciclaje</p>
+            <p>Tiempo restante : <span>00:00</span></p>
+            <p>Puntos <strong>150</strong></p>
+            <small>Parque de Atracciones Madrid</small>
+          </div>
+          <span class="challenge-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+      </section>
+    </div>
     } @else {
     <section class="placeholder-screen">
       {{ currentScreen }}
@@ -265,7 +519,7 @@
 
       <button
         class="nav-item"
-        [class.active]="currentScreen === 'challenges'"
+        [class.active]="isChallengeSectionActive()"
         type="button"
         (click)="navigateTo('challenges')"
       >
