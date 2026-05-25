@@ -3,9 +3,7 @@
   <section class="login-panel" aria-labelledby="login-title">
     <h1 id="login-title">Welcome to Green<br />Pass</h1>
 
-    <div class="login-logo" aria-label="Green Pass logo placeholder">
-      FOTO1
-    </div>
+    <img class="login-logo" src="/Logo1.png" alt="Green Pass logo" />
 
     <form class="login-form" (submit)="goHome($event)">
       <label class="field">
@@ -36,7 +34,7 @@
 <main class="app-shell">
   <section
     class="app-phone"
-    [class.no-scroll]="currentScreen !== 'home' && currentScreen !== 'promotion-detail' && currentScreen !== 'challenges'"
+    [class.no-scroll]="currentScreen !== 'home' && currentScreen !== 'promotion-detail' && currentScreen !== 'challenges' && currentScreen !== 'prizes' && currentScreen !== 'prize-detail' && currentScreen !== 'prize-offer-detail'"
   >
     <header class="app-header">
       <button class="icon-button back-button" type="button" aria-label="Volver" (click)="goBack()">
@@ -55,24 +53,24 @@
     <div class="home-content">
       <section class="featured-strip" aria-label="Eventos destacados">
         <button class="featured-card" type="button" (click)="openDetail('sea-lions')">
-          <div class="featured-photo">FOTO2</div>
+          <img class="featured-photo" src="/FOTO2.png" alt="Exhibicion educativa de leones marinos" />
           <h2>Exhibición educativa<br />de leones marinos</h2>
         </button>
 
         <button class="featured-card" type="button" (click)="openDetail('auditorium')">
-          <div class="featured-photo">FOTO3</div>
+          <img class="featured-photo" src="/FOTO3.png" alt="Guerra de las nubes" />
           <h2>Guerra de las<br />nubes</h2>
         </button>
 
-        <button class="featured-card" type="button">
-          <div class="featured-photo">FOTO4</div>
+        <button class="featured-card" type="button" (click)="openDetail('family')">
+          <img class="featured-photo" src="/FOTO4.png" alt="Experiencia familiar Green Pass" />
           <h2>Experiencia familiar<br />Green Pass</h2>
         </button>
       </section>
 
       <section class="promo-list" aria-label="Promociones">
         <button class="promo-card" type="button" (click)="openDetail('friday')">
-          <div class="promo-photo">FOTO5</div>
+          <img class="promo-photo" src="/FOTO5.png" alt="Entradas por 19,90 euros los viernes" />
           <div class="promo-copy">
             <h2>Entradas por<br />19,90€ los viernes</h2>
             <p>Planazo de <strong>viernes</strong> al mejor precio con esta promoción.</p>
@@ -82,7 +80,7 @@
         </button>
 
         <button class="promo-card" type="button" (click)="openDetail('groups')">
-          <div class="promo-photo">FOTO6</div>
+          <img class="promo-photo" src="/FOTO6.png" alt="Grupos de mas de 20 con 50 por ciento de descuento" />
           <div class="promo-copy">
             <h2>¡Grupos +20 con<br />50% de descuento!</h2>
             <p>Reúne a tu familia y amigos y aprovecha este <strong>precio especial.</strong></p>
@@ -91,8 +89,8 @@
           <span class="promo-arrow" aria-hidden="true">&rarr;</span>
         </button>
 
-        <button class="promo-card" type="button">
-          <div class="promo-photo">FOTO7</div>
+        <button class="promo-card" type="button" (click)="openDetail('reduced')">
+          <img class="promo-photo" src="/FOTO7.png" alt="Entrada reducida" />
           <div class="promo-copy">
             <h2>Entrada Reducida</h2>
             <p>El mejor precio para visitantes entre 3 y 7 años, con 65 años o más y los miembros de familias numerosas.</p>
@@ -101,8 +99,8 @@
           <span class="promo-arrow" aria-hidden="true">&rarr;</span>
         </button>
 
-        <button class="promo-card" type="button">
-          <div class="promo-photo">FOTO8</div>
+        <button class="promo-card" type="button" (click)="openDetail('free-meter')">
+          <img class="promo-photo" src="/FOTO8.png" alt="Entrada gratuita para menores de un metro" />
           <div class="promo-copy">
             <h2>Entrada gratuita menores de 1 m</h2>
             <p>Un día de diversión acuática en Aquópolis Villanueva y aprovecha esta <strong>ventaja especial.</strong></p>
@@ -111,8 +109,8 @@
           <span class="promo-arrow" aria-hidden="true">&rarr;</span>
         </button>
 
-        <button class="promo-card" type="button">
-          <div class="promo-photo">FOTO9</div>
+        <button class="promo-card" type="button" (click)="openDetail('zoo-groups')">
+          <img class="promo-photo" src="/FOTO9.png" alt="Grupos desde 16,50 euros por persona" />
           <div class="promo-copy">
             <h2>Grupos desde 16,50€ por persona</h2>
             <p>Visita en grupo Zoo Aquarium de Madrid y descubre los continentes y <strong>animales</strong> más sorprendentes.</p>
@@ -121,8 +119,8 @@
           <span class="promo-arrow" aria-hidden="true">&rarr;</span>
         </button>
 
-        <button class="promo-card" type="button">
-          <div class="promo-photo">FOTO10</div>
+        <button class="promo-card" type="button" (click)="openDetail('sharks')">
+          <img class="promo-photo" src="/FOTO10.png" alt="Durmiendo entre tiburones" />
           <div class="promo-copy">
             <h2>Durmiendo entre tiburones</h2>
             <p>Pasa una noche inolvidable durmiendo con los tiburones del acuario</p>
@@ -136,7 +134,7 @@
     <div class="detail-content">
       @if (activeDetail === 'friday') {
       <article class="detail-card">
-        <div class="detail-photo">FOTO5</div>
+        <img class="detail-photo" src="/FOTO5.png" alt="Entradas por 19,90 euros los viernes" />
         <h2>Entrada por 19,90€ los viernes</h2>
         <a class="map-link" href="#">Ver en el mapa <span>&rarr;</span></a>
 
@@ -157,7 +155,7 @@
       </article>
       } @else if (activeDetail === 'sea-lions') {
       <article class="detail-card sea-detail">
-        <div class="detail-photo">FOTO2</div>
+        <img class="detail-photo" src="/FOTO2.png" alt="Exhibicion educativa de leones marinos" />
         <h2>Exhibición educativa de leones marinos</h2>
         <a class="map-link" href="#">Ver en el mapa <span>&rarr;</span></a>
 
@@ -192,7 +190,7 @@
       </article>
       } @else if (activeDetail === 'groups') {
       <article class="detail-card">
-        <div class="detail-photo">FOTO6</div>
+        <img class="detail-photo" src="/FOTO6.png" alt="Grupos de mas de 20 con 50 por ciento de descuento" />
         <h2>¡Grupos +20 con 50% de descuento!</h2>
         <a class="map-link" href="#">Ver en el mapa <span>&rarr;</span></a>
 
@@ -203,10 +201,70 @@
           contacta con nuestro Contact Center.
         </p>
       </article>
+      } @else if (activeDetail === 'family') {
+      <article class="detail-card">
+        <img class="detail-photo" src="/FOTO4.png" alt="Experiencia familiar Green Pass" />
+        <h2>Experiencia familiar Green Pass</h2>
+        <a class="map-link" href="#">Ver en el mapa <span>&rarr;</span></a>
+
+        <h3>Plan familiar</h3>
+        <p>
+          Disfruta de una experiencia pensada para compartir el dia en familia con actividades,
+          zonas de descanso y ventajas especiales dentro del parque.
+        </p>
+      </article>
+      } @else if (activeDetail === 'reduced') {
+      <article class="detail-card">
+        <img class="detail-photo" src="/FOTO7.png" alt="Entrada reducida" />
+        <h2>Entrada Reducida</h2>
+        <a class="map-link" href="#">Ver en el mapa <span>&rarr;</span></a>
+
+        <h3>Precio especial</h3>
+        <p>
+          Entrada con precio reducido para visitantes entre 3 y 7 anos, personas de 65 anos o mas
+          y miembros de familias numerosas.
+        </p>
+      </article>
+      } @else if (activeDetail === 'free-meter') {
+      <article class="detail-card">
+        <img class="detail-photo" src="/FOTO8.png" alt="Entrada gratuita para menores de un metro" />
+        <h2>Entrada gratuita menores de 1 m</h2>
+        <a class="map-link" href="#">Ver en el mapa <span>&rarr;</span></a>
+
+        <h3>Ventaja infantil</h3>
+        <p>
+          Los menores de un metro pueden acceder gratis y disfrutar de un dia de diversion acuatica
+          con su familia.
+        </p>
+      </article>
+      } @else if (activeDetail === 'zoo-groups') {
+      <article class="detail-card">
+        <img class="detail-photo" src="/FOTO9.png" alt="Grupos desde 16,50 euros por persona" />
+        <h2>Grupos desde 16,50€ por persona</h2>
+        <a class="map-link" href="#">Ver en el mapa <span>&rarr;</span></a>
+
+        <h3>Visita en grupo</h3>
+        <p>
+          Organiza tu visita al Zoo Aquarium de Madrid en grupo y descubre sus espacios,
+          recorridos y animales con una tarifa especial.
+        </p>
+      </article>
+      } @else if (activeDetail === 'sharks') {
+      <article class="detail-card">
+        <img class="detail-photo" src="/FOTO10.png" alt="Durmiendo entre tiburones" />
+        <h2>Durmiendo entre tiburones</h2>
+        <a class="map-link" href="#">Ver en el mapa <span>&rarr;</span></a>
+
+        <h3>Noche en el acuario</h3>
+        <p>
+          Vive una noche diferente en Atlantis Aquarium Madrid y disfruta de una experiencia
+          inolvidable durmiendo junto al acuario.
+        </p>
+      </article>
       } @else {
       <article class="detail-card sea-detail">
-        <div class="detail-photo">FOTO3</div>
-        <h2>Exhibición educativa de leones marinos</h2>
+        <img class="detail-photo" src="/FOTO3.png" alt="Guerra de las nubes" />
+        <h2>Guerra de las nubes</h2>
         <a class="map-link" href="#">Ver en el mapa <span>&rarr;</span></a>
 
         <div class="info-row">
@@ -243,7 +301,11 @@
     } @else if (currentScreen === 'challenge-detail') {
     <div class="challenge-detail-content">
       <article class="challenge-detail-card">
+        @if (hasChallengeImage()) {
+        <img class="challenge-detail-photo" [src]="activeChallenge.image" [alt]="activeChallenge.title" />
+        } @else {
         <div class="challenge-detail-photo">{{ activeChallenge.image }}</div>
+        }
         <h2>{{ activeChallenge.title }}</h2>
 
         <button class="map-link challenge-map-link" type="button" (click)="openChallengeMap()">
@@ -272,7 +334,16 @@
         </select>
       </label>
 
-      <div class="map-viewport">
+      <div
+        #mapViewport
+        class="map-viewport"
+        [class.dragging]="isMapDragging"
+        (pointerdown)="startMapDrag($event, mapViewport)"
+        (pointermove)="dragMap($event, mapViewport)"
+        (pointerup)="stopMapDrag($event, mapViewport)"
+        (pointercancel)="stopMapDrag($event, mapViewport)"
+        (pointerleave)="stopMapDrag($event, mapViewport)"
+      >
         <div
           class="map-canvas"
           [class.attractions-map]="isAttractionsPark()"
@@ -293,11 +364,15 @@
           <div class="map-label charcas">Fuente de<br />las Charcas</div>
           <div class="map-label delfinario">Delfinario<br />Zoo Aquarium</div>
           <div class="map-label batan">Casa del Batan</div>
-          <span class="map-pin pin-one" aria-hidden="true"></span>
-          <span class="map-pin pin-two" aria-hidden="true"></span>
-          <span class="map-pin pin-three" aria-hidden="true"></span>
-          <span class="map-pin pin-four" aria-hidden="true"></span>
           }
+          <button class="map-pin pin-one" type="button" aria-label="Ver retos" (pointerdown)="$event.stopPropagation()" (click)="navigateTo('challenges')"></button>
+          <button class="map-pin pin-two" type="button" aria-label="Ver retos" (pointerdown)="$event.stopPropagation()" (click)="navigateTo('challenges')"></button>
+          <button class="map-pin pin-three" type="button" aria-label="Ver retos" (pointerdown)="$event.stopPropagation()" (click)="navigateTo('challenges')"></button>
+          <button class="map-pin pin-four" type="button" aria-label="Ver retos" (pointerdown)="$event.stopPropagation()" (click)="navigateTo('challenges')"></button>
+          <button class="map-pin pin-five" type="button" aria-label="Ver retos" (pointerdown)="$event.stopPropagation()" (click)="navigateTo('challenges')"></button>
+          <button class="map-pin pin-six" type="button" aria-label="Ver retos" (pointerdown)="$event.stopPropagation()" (click)="navigateTo('challenges')"></button>
+          <button class="map-pin pin-seven" type="button" aria-label="Ver retos" (pointerdown)="$event.stopPropagation()" (click)="navigateTo('challenges')"></button>
+          <button class="map-pin pin-eight" type="button" aria-label="Ver retos" (pointerdown)="$event.stopPropagation()" (click)="navigateTo('challenges')"></button>
         </div>
       </div>
 
@@ -308,20 +383,20 @@
     </section>
     } @else if (currentScreen === 'challenges') {
     <div class="challenges-content">
-      <div class="challenges-logo">IMAGEN1</div>
+      <img class="challenges-logo" src="/Logo1.png" alt="Green Pass logo" />
 
       <section class="challenge-list" aria-label="Lista de retos">
         <button
           class="challenge-card"
           type="button"
           (click)="openChallenge({
-            image: 'IMAGEN2',
+            image: '/RETOS2.png',
             title: 'Recoger residuos y llevarlos a un punto de reciclaje',
             park: 'Parque de atracciones Madrid',
             body: 'Recoge residuos dentro del parque y llévalos a un punto de reciclaje. Cuando termines, escanea el código para registrar el reto y sumar tus puntos.'
           })"
         >
-          <div class="challenge-photo">IMAGEN2</div>
+          <img class="challenge-photo" src="/RETOS2.png" alt="Recoger residuos y llevarlos a un punto de reciclaje" />
           <div class="challenge-copy">
             <h2>Recoger residuos y llevarlos a un punto de reciclaje</h2>
             <p>Tiempo restante : <span>00:00</span></p>
@@ -335,13 +410,13 @@
           class="challenge-card"
           type="button"
           (click)="openChallenge({
-            image: 'IMAGEN3',
+            image: '/RETOS3.png',
             title: 'Recoger bandejas',
             park: 'Parque de atracciones Madrid',
             body: 'Ayuda a mantener limpia la zona de comida recogiendo 5 bandejas y llevándolas al punto indicado. Completa el reto escaneando el código QR.'
           })"
         >
-          <div class="challenge-photo">IMAGEN3</div>
+          <img class="challenge-photo" src="/RETOS3.png" alt="Recoger bandejas" />
           <div class="challenge-copy">
             <h2>Recoger bandejas</h2>
             <p>Recoger 5 bandejas</p>
@@ -353,7 +428,7 @@
         </button>
 
         <button class="challenge-card" type="button" (click)="openChallenge()">
-          <div class="challenge-photo">IMAGEN4</div>
+          <img class="challenge-photo" src="/RETOS4.png" alt="Ayuda a Bob Esponja" />
           <div class="challenge-copy">
             <h2>Ayuda a Bob Esponja</h2>
             <p>Ayuda a recoger desechos para que Fondo de Bikini siga limpia</p>
@@ -368,13 +443,13 @@
           class="challenge-card"
           type="button"
           (click)="openChallenge({
-            image: 'IMAGEN5',
+            image: '/RETOS5.png',
             title: 'Recoger bandejas',
             park: 'Parque de atracciones Madrid',
             body: 'Recoge 5 bandejas y deposítalas en el lugar correcto para mantener el parque ordenado.'
           })"
         >
-          <div class="challenge-photo">IMAGEN5</div>
+          <img class="challenge-photo" src="/RETOS5.png" alt="Recoger bandejas" />
           <div class="challenge-copy">
             <h2>Recoger bandejas</h2>
             <p>Recoger 5 bandejas</p>
@@ -389,13 +464,13 @@
           class="challenge-card"
           type="button"
           (click)="openChallenge({
-            image: 'IMAGEN6',
+            image: '/RETOS6.png',
             title: 'Recoger bandejas',
             park: 'Parque de atracciones Madrid',
             body: 'Recoge 5 bandejas en la zona asignada y registra el reto para conseguir tus puntos.'
           })"
         >
-          <div class="challenge-photo">IMAGEN6</div>
+          <img class="challenge-photo" src="/RETOS6.png" alt="Recoger bandejas" />
           <div class="challenge-copy">
             <h2>Recoger bandejas</h2>
             <p>Recoger 5 bandejas</p>
@@ -410,13 +485,13 @@
           class="challenge-card"
           type="button"
           (click)="openChallenge({
-            image: 'IMAGEN7',
+            image: '/RETOS7.png',
             title: 'Recoger residuos',
             park: 'Parque Warner Madrid',
             body: 'Recoge residuos del parque y llévalos al punto de reciclaje más cercano. Escanea el QR al terminar.'
           })"
         >
-          <div class="challenge-photo">IMAGEN7</div>
+          <img class="challenge-photo" src="/RETOS7.png" alt="Recoger residuos" />
           <div class="challenge-copy">
             <h2>Recoger residuos</h2>
             <p>Recoger y llevar residuos al punto de reciclaje.</p>
@@ -431,13 +506,13 @@
           class="challenge-card"
           type="button"
           (click)="openChallenge({
-            image: 'IMAGEN8',
+            image: '/RETOS8.png',
             title: 'Ayuda a Bugs Bunny',
             park: 'Parque Warner Madrid',
             body: 'Ayuda a Bugs Bunny a recoger su casa y deja todo preparado para los siguientes visitantes.'
           })"
         >
-          <div class="challenge-photo">IMAGEN8</div>
+          <img class="challenge-photo" src="/RETOS8.png" alt="Ayuda a Bugs Bunny" />
           <div class="challenge-copy">
             <h2>Ayuda a Bugs Bunny</h2>
             <p>Ayuda a Bugs Bunny a recoger su casa</p>
@@ -452,13 +527,13 @@
           class="challenge-card"
           type="button"
           (click)="openChallenge({
-            image: 'IMAGEN9',
+            image: '/RETOS9.png',
             title: 'Descarga la app y regístrate',
             park: 'Parque de atracciones Madrid',
             body: 'Completa tu registro en GreenPass y escanea el QR para recibir los puntos de bienvenida.'
           })"
         >
-          <div class="challenge-photo">IMAGEN9</div>
+          <img class="challenge-photo" src="/RETOS9.png" alt="Descarga la app y registrate" />
           <div class="challenge-copy">
             <h2>Descarga la app y regístrate</h2>
             <p>Tiempo restante : <span>00:00</span></p>
@@ -490,6 +565,126 @@
         </button>
       </section>
     </div>
+    } @else if (currentScreen === 'prizes') {
+    <div class="prizes-content">
+      <h2>Ofertas</h2>
+
+      <section class="prize-grid" aria-label="Ofertas de premios">
+        @for (prize of prizes; track prize.id) {
+        <button class="prize-card" type="button" (click)="openPrize(prize)">
+          <span class="prize-tab">{{ prize.name }}</span>
+          <span class="prize-image-wrap">
+            <img class="prize-image" [src]="prize.image" [alt]="prize.name" />
+          </span>
+        </button>
+        }
+      </section>
+    </div>
+    } @else if (currentScreen === 'prize-detail') {
+    <div class="prize-detail-content">
+      <h2>{{ activePrize.title }}</h2>
+
+      <section class="prize-offer-list" [attr.aria-label]="'Premios de ' + activePrize.title">
+        @for (offer of activePrize.offers; track offer.title) {
+        <button class="prize-offer-card" type="button" (click)="openPrizeOffer(offer)">
+          <img class="prize-offer-image" [src]="offer.image" [alt]="offer.title" />
+          <span class="prize-offer-copy">
+            <strong>{{ offer.title }}</strong>
+            <span>O canjear por <em>{{ offer.points }}</em> puntos</span>
+            <small>Solo se puede canjear un cupón de esta oferta por pedido, y un canje de 3 ofertas distintas por pedido.</small>
+            <small>{{ offer.availability }}</small>
+          </span>
+          <span class="prize-offer-arrow" aria-hidden="true">&rarr;</span>
+        </button>
+        }
+      </section>
+    </div>
+    } @else if (currentScreen === 'prize-offer-detail') {
+    <div class="prize-final-content">
+      <article class="prize-final-card">
+        <img class="prize-final-image" [src]="activePrizeOffer.image" [alt]="activePrizeOffer.title" />
+
+        <h2>{{ activePrizeOffer.title }}</h2>
+
+        <button class="map-link prize-final-map-link" type="button">
+          Ver en el mapa <span>&rarr;</span>
+        </button>
+
+        <h3>Descuento de {{ activePrizeOffer.title }}</h3>
+        <p>
+          ¡Tus puntos tienen premio! Por solo {{ activePrizeOffer.points }} puntos, desbloqueas esta
+          oferta para tu próxima compra en el parque. El ahorro final se aplicará según el número de
+          entradas o productos seleccionados.
+        </p>
+        <p>¡Aprovecha ahora!</p>
+
+        <div class="prize-qr" aria-label="Código QR del premio"></div>
+      </article>
+    </div>
+    } @else if (currentScreen === 'ranking') {
+    <section class="ranking-screen" aria-label="Ranking">
+      <img class="ranking-logo" src="/Logo1.png" alt="Green Pass" />
+
+      <ol class="ranking-list">
+        @for (entry of rankingEntries; track entry.name + $index) {
+        <li class="ranking-row">
+          <span class="ranking-position">{{ $index + 1 }}</span>
+          <span class="ranking-name">{{ entry.name }}</span>
+          <span class="ranking-points">{{ entry.points }}</span>
+        </li>
+        }
+      </ol>
+    </section>
+    } @else if (currentScreen === 'profile') {
+    <section class="profile-screen" aria-label="Perfil">
+      <div class="profile-avatar" aria-label="Avatar generico"></div>
+
+      <section class="profile-qr-strip" aria-label="Entradas">
+        <article class="profile-qr-card">
+          <div class="profile-qr-code" aria-hidden="true"></div>
+          <h2>Entrada de Javier</h2>
+        </article>
+
+        <article class="profile-qr-card">
+          <div class="profile-qr-code" aria-hidden="true"></div>
+          <h2>Entrada de Diego</h2>
+        </article>
+
+        <article class="profile-qr-card">
+          <div class="profile-qr-code" aria-hidden="true"></div>
+          <h2>Entrada de Maria</h2>
+        </article>
+      </section>
+
+      <div class="profile-points">Tienes <strong>230</strong> puntos</div>
+
+      <section class="profile-park-strip" aria-label="Parques favoritos">
+        <article class="profile-park-card">
+          <img class="profile-park-photo" src="/prefil1.png" alt="Parque Warner Madrid" />
+          <h2>Parque Warner<br />Madrid</h2>
+        </article>
+
+        <article class="profile-park-card">
+          <img class="profile-park-photo" src="/prefil2.png" alt="Parque de atracciones madrid" />
+          <h2>Parque de<br />atracciones madrid</h2>
+        </article>
+
+        <article class="profile-park-card">
+          <img class="profile-park-photo" src="/prefil3.png" alt="Zoo Aquarium Madrid" />
+          <h2>Zoo Aquarium<br />Madrid</h2>
+        </article>
+
+        <article class="profile-park-card">
+          <img class="profile-park-photo" src="/prefil4.png" alt="Aquopolis Madrid" />
+          <h2>Aquopolis<br />Madrid</h2>
+        </article>
+
+        <article class="profile-park-card">
+          <img class="profile-park-photo" src="/prefil5.png" alt="Faunia Madrid" />
+          <h2>Faunia<br />Madrid</h2>
+        </article>
+      </section>
+    </section>
     } @else {
     <section class="placeholder-screen">
       {{ currentScreen }}
@@ -529,7 +724,7 @@
 
       <button
         class="nav-item"
-        [class.active]="currentScreen === 'prizes'"
+        [class.active]="isPrizeSectionActive()"
         type="button"
         (click)="navigateTo('prizes')"
       >
